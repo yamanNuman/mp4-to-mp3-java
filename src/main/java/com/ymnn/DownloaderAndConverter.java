@@ -4,12 +4,17 @@ import java.io.*;
 
 public class DownloaderAndConverter {
     //Windows
-    public static String SOURCE_PATH = "C:\\Users\\yaman\\OneDrive\\Desktop\\mp4-to-mp3-java\\mp4\\";
-    public static String TARGET_PATH = "C:\\Users\\yaman\\OneDrive\\Desktop\\mp4-to-mp3-java\\mp3\\";
+//    public static String SOURCE_PATH = "C:\\Users\\yaman\\OneDrive\\Desktop\\mp4-to-mp3-java\\mp4\\";
+//    public static String TARGET_PATH = "C:\\Users\\yaman\\OneDrive\\Desktop\\mp4-to-mp3-java\\mp3\\";
     //Linux
 //  public static String SOURCE_PATH= "/home/gengar/java-project/converter/mp4/";
 //  public static String TARGET_PATH = "/home/gengar/java-project/converter/mp3/";
-    public static String VIDEO_URL = "https://www.youtube.com/watch?v=KRlNvOSmcKI&ab_channel=righteous-hak%C5%9Finas";
+//    public static String VIDEO_URL = "https://www.youtube.com/watch?v=KRlNvOSmcKI&ab_channel=righteous-hak%C5%9Finas";
+
+    //Docker Env
+    String SOURCE_PATH = System.getenv("SOURCE_PATH");
+    String TARGET_PATH = System.getenv("TARGET_PATH");
+    String VIDEO_URL = System.getenv("VIDEO_URL");
 
     public void downloadAndConvert() {
         if(downloadVideo()) {
@@ -21,7 +26,8 @@ public class DownloaderAndConverter {
         String outputPath = SOURCE_PATH + "test.mp4";
         String[] command = {
                 //yt-dlp - Linux
-                "C:\\yt-dlp\\yt-dlp.exe",
+                //"C:\\yt-dlp\\yt-dlp.exe",
+                "yt-dlp",
                 //"bestvideo+bestaudio"
                 "-f","best",
                 "--merge-output-format","mp4",
@@ -37,7 +43,8 @@ public class DownloaderAndConverter {
 
         String[] command = {
                 //ffmpeg - Linux
-                "C:\\ffmpeg\\bin\\ffmpeg.exe",
+                //"C:\\ffmpeg\\bin\\ffmpeg.exe",
+                "ffmpeg",
                 "-i", inputPath,
                 "-vn",
                 "-acodec","libmp3lame",
