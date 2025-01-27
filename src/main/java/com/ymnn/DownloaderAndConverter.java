@@ -3,8 +3,12 @@ package com.ymnn;
 import java.io.*;
 
 public class DownloaderAndConverter {
-    public static String SOURCE_PATH= "/home/gengar/java-project/converter/mp4/";
-    public static String TARGET_PATH = "/home/gengar/java-project/converter/mp3/";
+    //Windows
+    public static String SOURCE_PATH = "C:\\Users\\yaman\\OneDrive\\Desktop\\mp4-to-mp3-java\\mp4\\";
+    public static String TARGET_PATH = "C:\\Users\\yaman\\OneDrive\\Desktop\\mp4-to-mp3-java\\mp3\\";
+    //Linux
+//  public static String SOURCE_PATH= "/home/gengar/java-project/converter/mp4/";
+//  public static String TARGET_PATH = "/home/gengar/java-project/converter/mp3/";
     public static String VIDEO_URL = "https://www.youtube.com/watch?v=KRlNvOSmcKI&ab_channel=righteous-hak%C5%9Finas";
 
     public void downloadAndConvert() {
@@ -16,8 +20,10 @@ public class DownloaderAndConverter {
     private boolean downloadVideo() {
         String outputPath = SOURCE_PATH + "test.mp4";
         String[] command = {
-                "yt-dlp",
-                "-f","bestvideo+bestaudio",
+                //yt-dlp - Linux
+                "C:\\yt-dlp\\yt-dlp.exe",
+                //"bestvideo+bestaudio"
+                "-f","best",
                 "--merge-output-format","mp4",
                 "-o", outputPath,
                 VIDEO_URL
@@ -30,7 +36,8 @@ public class DownloaderAndConverter {
         String outputPath = TARGET_PATH + "test.mp3";
 
         String[] command = {
-                "ffmpeg",
+                //ffmpeg - Linux
+                "C:\\ffmpeg\\bin\\ffmpeg.exe",
                 "-i", inputPath,
                 "-vn",
                 "-acodec","libmp3lame",
