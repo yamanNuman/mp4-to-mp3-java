@@ -3,13 +3,18 @@ package com.ymnn;
 import java.io.*;
 
 public class DownloaderAndConverter {
-    //Windows
-//    public static String SOURCE_PATH = "C:\\Users\\yaman\\OneDrive\\Desktop\\mp4-to-mp3-java\\mp4\\";
-//    public static String TARGET_PATH = "C:\\Users\\yaman\\OneDrive\\Desktop\\mp4-to-mp3-java\\mp3\\";
-    //Linux
-//  public static String SOURCE_PATH= "/home/gengar/java-project/converter/mp4/";
-//  public static String TARGET_PATH = "/home/gengar/java-project/converter/mp3/";
-//    public static String VIDEO_URL = "https://www.youtube.com/watch?v=KRlNvOSmcKI&ab_channel=righteous-hak%C5%9Finas";
+    /*
+        Windows System
+        public static String SOURCE_PATH = "C:\\Users\\username\\.....\\mp4-to-mp3-java\\mp4\\;
+        public static String TARGET_PATH = "C:\\Users\\username\\.....\\mp4-to-mp3-java\\mp3\\;
+        public static String VIDEO_URL = "youtube-link";
+     */
+    /*
+    Linux System
+        public static String SOURCE_PATH= "/home/username/mp4-to-mp3-java/mp4/";
+        public static String TARGET_PATH = "/home/username/mp4-to-mp3-java/mp3/";
+        public static String VIDEO_URL = "youtube-link";
+     */
 
     //Docker Env
     String SOURCE_PATH = System.getenv("SOURCE_PATH");
@@ -25,10 +30,11 @@ public class DownloaderAndConverter {
     private boolean downloadVideo() {
         String outputPath = SOURCE_PATH + "test.mp4";
         String[] command = {
-                //yt-dlp - Linux
-                //"C:\\yt-dlp\\yt-dlp.exe",
+              /*
+                Linux -> yt-dlp
+                Windows -> C:\\yt-dlp\\yt-dlp.exe
+              */
                 "yt-dlp",
-                //"bestvideo+bestaudio"
                 "-f","best",
                 "--merge-output-format","mp4",
                 "-o", outputPath,
@@ -42,8 +48,10 @@ public class DownloaderAndConverter {
         String outputPath = TARGET_PATH + "test.mp3";
 
         String[] command = {
-                //ffmpeg - Linux
-                //"C:\\ffmpeg\\bin\\ffmpeg.exe",
+              /*
+                Linux -> ffmpeg
+                Windows -> C:\\ffmpeg\\bin\\ffmpeg.exe
+              */
                 "ffmpeg",
                 "-i", inputPath,
                 "-vn",
